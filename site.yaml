@@ -1,0 +1,9 @@
+---
+# Deploy web app
+- hosts: web
+  user: vagrant
+  vars:
+      iptables_file: rules.iptables
+      spf13_output_file_name: spf13-script.sh
+  roles:
+      - common

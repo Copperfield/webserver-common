@@ -1,0 +1,15 @@
+---
+# Intall spf13 in any debian systems
+- name: Install spf13-vim required packages
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - curl
+    - git
+    - vim
+  sudo: yes
+
+- name: Download spf13 vim customizations
+  command: curl http://j.mp/spf13-vim3 -L -o {{ spf13_output_file_name }}
+
+- name: launch spf13
+  command: sh {{ spf13_output_file_name }}
