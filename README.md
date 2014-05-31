@@ -7,4 +7,8 @@ Use
 ===
 
 Move to main folder of repository and type:
-'ansible-playbook -i hosts site.yaml' 
+```bash
+
+    ansible-playbook -i hosts site.yaml
+```
+
