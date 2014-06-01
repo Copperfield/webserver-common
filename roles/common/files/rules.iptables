@@ -1,46 +1,46 @@
 *filter
-# Denegamos todo por defecto como politica basica
+# Default policy is drop 
 :INPUT DROP [0:0]
 :FORWARD DROP [0:0]
-:OUTPUT DROP [0:0] 
+:OUTPUT DROP [0:0]
 
-# No tener en cuenta el trafico de loop local (Propia maquina)
+# Dont care lo traffic
 -A INPUT -i lo -j ACCEPT
 
-# Descartar los paquetes invalidos
+# Drop invalid packages
 -A INPUT -m conntrack --ctstate INVALID -j DROP
 
-# Bloquear los paquetes del loop local.
+# Block local loop packages.
 -4 -A INPUT -s 127.0.0.0/8 ! -i lo -j DROP
 -6 -A INPUT -s ::1/128 ! -i lo -j DROP
 
-# Descartar los paquetes que no tengan la direccion especifica del servidor.
+# Deactivate no specifec target ip traffic.
 -4 -A INPUT -m addrtype --dst-type BROADCAST -j DROP
 -4 -A INPUT -m addrtype --dst-type MULTICAST -j DROP
 -4 -A INPUT -m addrtype --dst-type ANYCAST -j DROP
 -4 -A INPUT -d 224.0.0.0/4 -j DROP
 
-# Limitar fuerza bruta para ICMP.
+# Limit brute force ICMP.
 -N ICMPFLOOD
 -A ICMPFLOOD -m recent --set --name ICMP --rsource
 -A ICMPFLOOD -m recent --update --seconds 1 --hitcount 6 --name ICMP --rsource --rttl -m limit --limit 1/sec --limit-burst 1 -j LOG --log-prefix "iptables[ICMP-flood]: "
 -A ICMPFLOOD -m recent --update --seconds 1 --hitcount 6 --name ICMP --rsource --rttl -j DROP
 -A ICMPFLOOD -j ACCEPT
 
-# Aceptar HTTP
+# Accept HTTP
 -A INPUT -p tcp -m multiport --dports 80,443 -m state --state NEW -j ACCEPT
 -A OUTPUT -p tcp -m multiport --sport 80,443 -m state --state NEW -j ACCEPT
 
-# Aceptar ssh
+# Accept ssh
 -A INPUT -p tcp --dport 22 -j ACCEPT
 -A OUTPUT -p tcp --sport 22 -j ACCEPT
 
-# Permitir icmp ipv4 Seguimos rfc 792
+# Allow icmp ipv4 follow RFC 792
 -4 -A INPUT -p icmp --icmp-type 0  -m conntrack --ctstate NEW -j ACCEPT
 -4 -A INPUT -p icmp --icmp-type 3  -m conntrack --ctstate NEW -j ACCEPT
 -4 -A INPUT -p icmp --icmp-type 11 -m conntrack --ctstate NEW -j ACCEPT
 
-# Permitir ICMP para IPV6 RFC 4890.
+# Allow ICMP IPV6 follow RFC 4890.
 -6 -A INPUT              -p ipv6-icmp --icmpv6-type 1   -j ACCEPT
 -6 -A INPUT              -p ipv6-icmp --icmpv6-type 2   -j ACCEPT
 -6 -A INPUT              -p ipv6-icmp --icmpv6-type 3   -j ACCEPT
@@ -62,18 +62,18 @@
 -6 -A INPUT -s fe80::/10 -p ipv6-icmp --icmpv6-type 152 -j ACCEPT
 -6 -A INPUT -s fe80::/10 -p ipv6-icmp --icmpv6-type 153 -j ACCEPT
 
-# Permitir ping y filtrar con la regla de arriba
+# Allow ping and filter
 -4 -A INPUT -p icmp --icmp-type 8  -m conntrack --ctstate NEW -j ICMPFLOOD
 -6 -A INPUT -p ipv6-icmp --icmpv6-type 128 -j ICMPFLOOD
 -A OUTPUT -p icmp --icmp-type 0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-# Como buena practica laznzar error rapido para trafico relacionado con AUTH.
+# Best practica launch fast error for AUTH relationship traffic.
 -A INPUT -p tcp --dport 113 --syn -m conntrack --ctstate NEW -j REJECT --reject-with tcp-reset
 
-# Prevenir que el trafico de un enventual DOS se registre en los logs. 1 por segundo.
--A INPUT -m limit --limit 1/second --limit-burst 100 -j LOG --log-prefix "iptables[DOS]: "
+# Logging DOS traffic.
+#-A INPUT -m limit --limit 1/second --limit-burst 100 -j LOG --log-prefix "iptables[DOS]: "
 
-# Permitir el trafico DNS
+# Allow DNS traffic.
 -A OUTPUT -p udp --dport 53 --sport 1024:65535 -j ACCEPT
 -A INPUT -p udp --sport 53 --dport 1024:65535 -j ACCEPT
 
@@ -81,8 +81,8 @@
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 # Allow APT-GET
--A OUTPUT -p tcp -d ftp.us.debian.org -j ACCEPT
--A OUTPUT -p tcp -d volatile.debian.org -j ACCEPT
--A OUTPUT -p tcp -d security.debian.org -j ACCEPT
+-A OUTPUT -p tcp -m multiport --dports 443,80 -m state --state NEW,ESTABLISHED -j ACCEPT
 
+# Log debug mode
+#-A OUTPUT -s 0.0.0.0/0 -d 0.0.0.0/0 -j LOG --log-prefix "iptables[DEBUG]: " --log-level info
 COMMIT

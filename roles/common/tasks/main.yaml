@@ -1,6 +1,6 @@
 ---
 # All common tasks
-- include: register_rsa.yaml
-- include: spf13.yaml
-- include: ohmyzsh.yaml
+#- include: register_rsa.yaml
+#- include: spf13.yaml
+#- include: ohmyzsh.yaml
 - include: iptables.yaml
