@@ -12,8 +12,8 @@ Role Variables
 --------------
 
 ```yaml
-webserver_common_iptables_file: rules.iptables
-webserver_common_spf13_output_file_name: spf13-script.sh
+webserver_common_iptables_file:
+webserver_common_spf13_output_file_name:
 ```
 
 See the [defaults](defaults/main.yml) to have the complete view. Make sure, if you edit them, to copy all of them in your host/vars/... files, and change the ones that need tweaking (it’s in fact only one variable, containing a map.)
