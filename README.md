@@ -1,5 +1,5 @@
-Webserver-common
-========
+Webserver-common [![Build Status](https://travis-ci.org/Copperfield/webserver-common.svg)](https://travis-ci.org/Copperfield/webserver-common)
+================
 
 Common task for any  Ubuntu webserver machine.
 
