@@ -1,0 +1,6 @@
+---
+# All common tasks
+- include: register_rsa.yml
+- include: spf13.yml
+- include: ohmyzsh.yml
+- include: iptables.yml

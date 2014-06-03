@@ -9,7 +9,7 @@
   sudo: yes
 
 - name: Download spf13 vim customizations
-  command: curl http://j.mp/spf13-vim3 -L -o {{ spf13_output_file_name }}
+  command: curl http://j.mp/spf13-vim3 -L -o {{ webserver_common_spf13_output_file_name }}
 
 - name: launch spf13
-  command: sh {{ spf13_output_file_name }}
+  command: sh {{ webserver_common_spf13_output_file_name }}

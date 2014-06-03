@@ -1,0 +1,4 @@
+---
+# defaults file for common
+webserver_common_iptables_file: rules.iptables
+webserver_common_spf13_output_file_name: spf13-script.sh
