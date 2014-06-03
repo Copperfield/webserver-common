@@ -83,6 +83,4 @@
 # Allow APT-GET
 -A OUTPUT -p tcp -m multiport --dports 443,80 -m state --state NEW,ESTABLISHED -j ACCEPT
 
-# Log debug mode
-#-A OUTPUT -s 0.0.0.0/0 -d 0.0.0.0/0 -j LOG --log-prefix "iptables[DEBUG]: " --log-level info
 COMMIT
