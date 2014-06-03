@@ -22,10 +22,12 @@ See the [defaults](defaults/main.yml) to have the complete view. Make sure, if y
 Example Playbook
 -------------------------
  Just I do:
+
+```yaml
     - hosts: servers
       roles:
          - { role: webserver-common }
-
+```
 License
 -------
 
