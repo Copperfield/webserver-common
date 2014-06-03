@@ -1,5 +1,5 @@
 ---
 # Intall spf13 in any debian systems
 - name: Add RSA key to the remote host
-  authorized_key: user=vagrant key= "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  authorized_key: user={{ ansible_user_id }} key= "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
   when: webserver_common_enviroment != 'test'

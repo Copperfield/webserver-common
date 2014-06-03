@@ -7,9 +7,9 @@
 - name: Checkout github repo
   git: repo=git://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
 
-- name: Backuo zshrc
+- name: Backup zshrc
   copy: src=.zshrc dest=~/.zshrc backup=yes
 
 - name: Change user shell
-  user: name=vagrant shell=/bin/zsh
+  user: name={{ ansible_user_id }} shell=/bin/zsh
   sudo: yes
