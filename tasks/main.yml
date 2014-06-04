@@ -8,5 +8,5 @@
 
 - include: ohmyzsh.yml
 
-- include: iptables.ymli
+- include: iptables.yml
   when: webserver_common_environment != 'test'
