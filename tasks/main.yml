@@ -2,7 +2,7 @@
 # All common tasks
 # I use when clausule to work with OpenVZ limitations
 - include: register_rsa.yml
-  when: webserver_common_environment != 'test'
 - include: spf13.yml
 - include: ohmyzsh.yml
 - include: iptables.yml
+  when: webserver_common_environment != 'test'

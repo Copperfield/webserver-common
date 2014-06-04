@@ -2,9 +2,7 @@
 # Intall spf13 in any debian systems
 - name: Copy iptables rules
   copy: src={{ webserver_common_iptables_file }} dest=./
-  when: webserver_common_environment != 'test'
 
 - name: Apply iptables rules
   shell: iptables-restore < rules.iptables
   sudo: yes
-  when: webserver_common_environment != 'test'
