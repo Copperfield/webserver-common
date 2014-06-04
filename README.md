@@ -1,7 +1,13 @@
 Webserver-common [![Build Status](https://travis-ci.org/Copperfield/webserver-common.svg?branch=master)](https://travis-ci.org/Copperfield/webserver-common)
 ================
 
-Common task for any  Ubuntu webserver machine.
+Common tasks for any Ubuntu webserver machine. It includes the following:
+* Installation of:
+ * [spf13's vim distribution](https://github.com/spf13/spf13-vim)
+ * zsh
+ * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* Firewall configuration
+* Allowing an RSA access key without introducing a password
 
 Requirements
 ------------
@@ -16,12 +22,12 @@ webserver_common_iptables_file:
 webserver_common_spf13_output_file_name:
 ```
 
-See the [defaults](defaults/main.yml) to have the complete view. Make sure, if you edit them, to copy all of them in your host/vars/... files, and change the ones that need tweaking (it’s in fact only one variable, containing a map.)
+See the [defaults](defaults/main.yml) to have a complete view of the variables. Make sure when editing variables, to copy all in your host/vars/... files, and tweak to your liking (actually it's only one variable containing a map ;) ).
 
 
-Example Playbook
+Playbook Example
 -------------------------
- Just I do:
+I just do:
 
 ```yaml
     - hosts: servers
@@ -36,5 +42,4 @@ MIT
 Author Information
 ------------------
 
-Feedback, issues and question....
-You are [welcome](https://github.com/Copperfield/webserver-common/issues)!
+Feedback, issues and questions are [welcome](https://github.com/Copperfield/webserver-common/issues)!
