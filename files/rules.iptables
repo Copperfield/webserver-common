@@ -83,4 +83,7 @@
 # Allow APT-GET
 -A OUTPUT -p tcp -m multiport --dports 443,80 -m state --state NEW,ESTABLISHED -j ACCEPT
 
+# Allow trafic with github.com
+-A OUTPUT -d github.com -m state --state NEW,ESTABLISHED -j ACCEPT
+
 COMMIT

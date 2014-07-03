@@ -1,11 +1,14 @@
 ---
 # Intall spf13 in any debian systems
 - name: Install zsh package
-  apt: name=zsh state=latest update_cache=yes
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+      - zsh
+      - git
   sudo: yes
 
 - name: Checkout github repo
-  git: repo=git://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
 
 - name: Backup zshrc
   copy: src=.zshrc dest=~/.zshrc backup=yes
