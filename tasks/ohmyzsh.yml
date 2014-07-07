@@ -11,7 +11,7 @@
   git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
 
 - name: Backup zshrc
-  copy: src=.zshrc dest=~/.zshrc backup=yes
+  copy: src=.zshrc dest=~/.zshrc
 
 - name: Change user shell
   user: name={{ ansible_user_id }} shell=/bin/zsh
