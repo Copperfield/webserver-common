@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Ciooerfueld
+  author: Copperfield
   description: Common task for any webserver machine
   license: MIT
   min_ansible_version: 1.6666
